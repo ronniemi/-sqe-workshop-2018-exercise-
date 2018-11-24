@@ -52,7 +52,7 @@ describe('assignment_expression_hendler', () => {
 
     it('is parsing an expression assignment correctly', () => {
         assert.equal(JSON.stringify(buildTable('a=4+5')),
-        '[{"line":1,"type":"assignment expression","name":"a","condition":"","value":"4+5"}]');
+        '[{"line":1,"type":"assignment expression","name":"a","condition":"","value":"4 + 5"}]');
     });
 
     it('is parsing an boolean assignment correctly', () => {
@@ -69,27 +69,27 @@ describe('while_statement_hendler', () => {
 
     it('is parsing an expression condition correctly', () => {
         assert.equal(JSON.stringify(buildTable('while(7+10){}')),
-        '[{"line":1,"type":"while statement","name":"","condition":"7+10","value":""}]');
+        '[{"line":1,"type":"while statement","name":"","condition":"7 + 10","value":""}]');
     });
 
     it('is parsing an grater then condition correctly', () => {
         assert.equal(JSON.stringify(buildTable('while(x>80){}')),
-        '[{"line":1,"type":"while statement","name":"","condition":"x>80","value":""}]');
+        '[{"line":1,"type":"while statement","name":"","condition":"x > 80","value":""}]');
     });
 
     it('is parsing an grater then/equal condition correctly', () => {
         assert.equal(JSON.stringify(buildTable('while(x>=80){}')),
-        '[{"line":1,"type":"while statement","name":"","condition":"x>=80","value":""}]');
+        '[{"line":1,"type":"while statement","name":"","condition":"x >= 80","value":""}]');
     });
 
     it('is parsing an lower then condition correctly', () => {
         assert.equal(JSON.stringify(buildTable('while(x<80){}')),
-        '[{"line":1,"type":"while statement","name":"","condition":"x<80","value":""}]');
+        '[{"line":1,"type":"while statement","name":"","condition":"x < 80","value":""}]');
     });
 
     it('is parsing an lower then/equal condition correctly', () => {
         assert.equal(JSON.stringify(buildTable('while(x<=80){}')),
-        '[{"line":1,"type":"while statement","name":"","condition":"x<=80","value":""}]');
+        '[{"line":1,"type":"while statement","name":"","condition":"x <= 80","value":""}]');
     });
 
     it('is parsing an null condition correctly', () => {
@@ -106,7 +106,7 @@ describe('if_statement_hendler', () => {
 
     it('is parsing an expression condition correctly', () => {
         assert.equal(JSON.stringify(buildTable('if(4+5){}')),
-        '[{"line":1,"type":"if statement","name":"","condition":"4+5","value":""}]');
+        '[{"line":1,"type":"if statement","name":"","condition":"4 + 5","value":""}]');
     });
 
     it('is parsing an boolean condition correctly', () => {
@@ -138,7 +138,7 @@ describe('return_statement_hendler', () => {
 
     it('is parsing an expression return correctly', () => {
         assert.equal(JSON.stringify(buildTable('function func(){return 4+5}')),
-        '[{"line":1,"type":"function declaration","name":"func","condition":"","value":""},{"line":1,"type":"return statement","name":"","condition":"","value":"4+5"}]');
+        '[{"line":1,"type":"function declaration","name":"func","condition":"","value":""},{"line":1,"type":"return statement","name":"","condition":"","value":"4 + 5"}]');
     });
 
     it('is parsing an boolean return correctly', () => {
@@ -155,12 +155,12 @@ describe('return_statement_hendler', () => {
 describe('parse expression', () => {
     it('is parsing an simple expression correctly', () => {
         assert.equal(JSON.stringify(buildTable('a=b+c')),
-         '[{"line":1,"type":"assignment expression","name":"a","condition":"","value":"b+c"}]');
+         '[{"line":1,"type":"assignment expression","name":"a","condition":"","value":"b + c"}]');
     });
 
     it('is parsing an complex expression correctly', () => {
         assert.equal(JSON.stringify(buildTable('a=(b+c)*7/d - (65-e)')),
-        '[{"line":1,"type":"assignment expression","name":"a","condition":"","value":"b+c*7/d-65-e"}]');
+        '[{"line":1,"type":"assignment expression","name":"a","condition":"","value":"b + c * 7 / d - 65 - e"}]');
     }); 
 
     it('is parsing an member expression correctly', () => {
@@ -204,31 +204,31 @@ describe('for_statement_hendler', () => {
 
     it('is parsing an comlex test correctly', () => {
         assert.equal(JSON.stringify(buildTable('for(;i<5*n/24;){}')),
-         '[{"line":1,"type":"for statement","name":"","condition":";i<5*n/24;","value":""}]');
+         '[{"line":1,"type":"for statement","name":"","condition":";i < 5 * n / 24;","value":""}]');
     });
 
     it('is parsing an empty init statement correctly', () => {
         assert.equal(JSON.stringify(buildTable('for(;i<5;i++){}')),
-         '[{"line":1,"type":"for statement","name":"","condition":";i<5;i++","value":""}]');
+         '[{"line":1,"type":"for statement","name":"","condition":";i < 5;i++","value":""}]');
     });
 
     it('is parsing an empty update statment correctly', () => {
         assert.equal(JSON.stringify(buildTable('for(i=0;i<5;){}')),
-        '[{"line":1,"type":"for statement","name":"","condition":"i=0;i<5;","value":""}]');
+        '[{"line":1,"type":"for statement","name":"","condition":"i = 0;i < 5;","value":""}]');
     }); 
 
     it('is parsing an empty update and init statment correctly', () => {
         assert.equal(JSON.stringify(buildTable('for(;i<5;){}')),
-        '[{"line":1,"type":"for statement","name":"","condition":";i<5;","value":""}]');
+        '[{"line":1,"type":"for statement","name":"","condition":";i < 5;","value":""}]');
     });
 
     it('is parsing an complex init statment correctly', () => {
         assert.equal(JSON.stringify(buildTable('for(i=n+16/x;i<5;){}')),
-        '[{"line":1,"type":"for statement","name":"","condition":"i=n+16/x;i<5;","value":""}]');
+        '[{"line":1,"type":"for statement","name":"","condition":"i = n + 16 / x;i < 5;","value":""}]');
     });
 
     it('is parsing an complex update statment correctly', () => {
         assert.equal(JSON.stringify(buildTable('for(;i<5;i=i+(i/n*24)){}')),
-        '[{"line":1,"type":"for statement","name":"","condition":";i<5;i=i+i/n*24","value":""}]');
+        '[{"line":1,"type":"for statement","name":"","condition":";i < 5;i = i + i / n * 24","value":""}]');
     });
 });
