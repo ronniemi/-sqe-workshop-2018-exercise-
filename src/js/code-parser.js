@@ -170,7 +170,7 @@ function parseExpression(obj){
         return null;
     }
     if(!(obj.type in expression_dictionary)){
-        return parseExpression(obj.left) + obj.operator + parseExpression(obj.right);
+        return parseExpression(obj.left) + ' ' + obj.operator + ' ' + parseExpression(obj.right);
     }
     return expression_dictionary[obj.type](obj);
 }
